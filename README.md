@@ -2,6 +2,8 @@
 
 <img width="448" height="502" alt="image" src="https://github.com/user-attachments/assets/ef6c0cea-a454-42ae-90ba-bd40bb935538" />
 
+Simple Python script to track the angle between two points from a video, 
+designed to track colored markers on a leg and test response visually.
 
 Processes every supported video in a folder, tracks a solid pink dot and a
 solid cyan dot, and measures their relative angle once per frame. The first
