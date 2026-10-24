@@ -14,3 +14,12 @@ for straightforward webcam access; WSL is fine for editing.
 
 Potential future addition: track three markers and calculate the joint angle at
 the middle marker.
+
+
+to use the tracker run:
+
+```
+cd C:\lolo\dev\biped\servo-response-tracker
+.\.venv\Scripts\Activate.ps1
+python tracker.py "C:\path\to\your\videos"
+```

@@ -1,26 +1,45 @@
 # Marker angle tracker
 
-Tracks a solid pink dot and a solid cyan dot from a USB webcam. It shows each
-dot's coloured-pixel centroid and the signed angle from the pink dot to the
-cyan dot. Image-right is `0°`; counter-clockwise is positive.
+Processes every supported video in a folder, tracks a solid pink dot and a
+solid cyan dot, and measures their relative angle once per frame. The first
+frame containing both markers is 0 degrees; later values are continuously
+unwrapped so crossing +/-180 degrees does not create a false jump.
+
+For each source video, the tracker writes to an output subfolder:
+
+    videos/
+        test.mp4
+        output/
+            test-angles.csv
+            test-overlay.mp4
+
+The CSV contains the frame number, timestamp, relative angle, and marker
+detection status. A missing marker produces a blank angle for that frame.
+
+The overlay video contains the detected markers, a solid line between them,
+the relative angle, and a yellow dotted reference line. The reference line is
+anchored at the current cyan marker, follows the initial line back toward the
+pink side, and has the same length as the current marker-to-marker line.
 
 ## Run on Windows
 
-Run this in PowerShell from the project directory, not inside WSL, so Windows
-has direct access to the webcam:
+Run this in PowerShell from this directory:
 
-```powershell
-py -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python tracker.py
-```
+    py -m venv .venv
+    .\.venv\Scripts\Activate.ps1
+    python -m pip install -r requirements.txt
+    python tracker.py "C:\path\to\videos"
 
-Press `q` in the preview window to stop. If the USB webcam is not camera `0`,
-change `CAMERA_INDEX` near the top of `tracker.py`.
+Supported input extensions are .mp4, .avi, .mov, and .mkv. If the folder
+argument is omitted, the tracker uses a videos folder beside tracker.py,
+creating it if necessary.
+
+Existing outputs are skipped. To intentionally replace them:
+
+    python tracker.py "C:\path\to\videos" --overwrite
 
 ## Tuning
 
-`MARKERS` contains the HSV ranges for pink and cyan. `MIN_BLOB_AREA` ignores
-small coloured specks; begin with its default of 200 pixels and increase it if
-reflections are selected instead of the marker.
+MARKERS contains the HSV ranges for pink and cyan. MIN_BLOB_AREA ignores small
+coloured specks. Change these constants if lighting, compression, camera
+distance, or marker size causes missed or false detections.
