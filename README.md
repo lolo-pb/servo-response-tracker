@@ -1,5 +1,8 @@
 # Marker angle tracker
 
+<img width="448" height="502" alt="image" src="https://github.com/user-attachments/assets/ef6c0cea-a454-42ae-90ba-bd40bb935538" />
+
+
 Processes every supported video in a folder, tracks a solid pink dot and a
 solid cyan dot, and measures their relative angle once per frame. The first
 frame containing both markers is 0 degrees; later values are continuously
