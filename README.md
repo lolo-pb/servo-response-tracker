@@ -4,6 +4,8 @@ Simple Python script to track the angle between two points from a video,
 Use colored markers on a leg and anlalyze response.
 
 <img width="448" height="502" alt="image" src="https://github.com/user-attachments/assets/ef6c0cea-a454-42ae-90ba-bd40bb935538" />
+<img width="745" height="277" alt="image" src="https://github.com/user-attachments/assets/2fda5488-d515-4fd8-866a-0dbc6813e229" />
+
 
 Processes every supported video in a folder, tracks a solid pink dot and a
 solid cyan dot, and measures their relative angle once per frame. The first
